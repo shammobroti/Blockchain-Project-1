@@ -8,6 +8,7 @@ contract Patient {
 
     struct PatientInfo {
         uint id;
+        address ethereumAddress;
         uint age;
         Gender gender;
         VaccineStatus vaccine_status;
@@ -44,6 +45,7 @@ contract Patient {
         patientList.push(
             PatientInfo(
                 1,
+                msg.sender,
                 25,
                 Gender.Male,
                 VaccineStatus.not_vaccinated,
@@ -67,6 +69,7 @@ contract Patient {
 
         PatientInfo memory temporaryPatient = PatientInfo(
             initialPatientID + 1,
+            msg.sender,
             _age,
             Gender(_gender),
             VaccineStatus.not_vaccinated,
@@ -189,8 +192,6 @@ contract Patient {
             }
         }
     }
-
-
 
     // Function to calculate the percentage of Children, Teenage, Young and Elder patients
     function calculateAgeGroupPercentage() public view returns (uint, uint, uint, uint) {
